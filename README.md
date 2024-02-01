@@ -1,9 +1,7 @@
 # JPG to PDF - Simple solution to fix simple problem
 <a name="readme-top"></a>
 ## About The Project
-I made it for the use in WebCon APP - since app does not support jpg & it was easier for our workers to just take picture with their phones
-i needed simple and elegant solution to automaticly change every jpg to pdf since i got 50+ files every day
-
+I made it for the use in WebCon APP - since app does not support jpg natively.
 ## Types of Files:
 
 * JPG to PDF - Standard Version
