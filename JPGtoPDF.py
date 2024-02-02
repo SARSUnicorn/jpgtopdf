@@ -52,8 +52,8 @@ def convert_images_to_individual_pdfs(input_folder, output_folder, archive_folde
             print(f"Error processing {image_name}: {e}")
 
 def main_loop():
-    input_folders = ["C:/users/admin/Dropbox/Azja","C:/users/admin/Dropbox/Browar", "C:/users/admin/Dropbox/Cafe","C:/users/admin/Dropbox/CKF13","C:/users/admin/Dropbox/CookClub","C:/users/admin/Dropbox/Corner","C:/users/admin/Dropbox/Destilo","C:/users/admin/Dropbox/Europejska","C:/users/admin/Dropbox/Garden","C:/users/admin/Dropbox/GND","C:/users/admin/Dropbox/Hotelowa","C:/users/admin/Dropbox/Italia","C:/users/admin/Dropbox/Izba","C:/users/admin/Dropbox/Kuznica","C:/users/admin/Dropbox/NewPort","C:/users/admin/Dropbox/Pino","C:/users/admin/Dropbox/Remo","C:/users/admin/Dropbox/River","C:/users/admin/Dropbox/Stek","C:/users/admin/Dropbox/Zapiecek"]
-    archive_folders = ["D:/ftp/dropbox/Azja","D:/ftp/dropbox/Browar", "D:/ftp/dropbox/Cafe","D:/ftp/dropbox/CKF13","D:/ftp/dropbox/CookClub","D:/ftp/dropbox/Corner","D:/ftp/dropbox/Destilo","D:/ftp/dropbox/Europejska","D:/ftp/dropbox/Garden","D:/ftp/dropbox/GND","D:/ftp/dropbox/Hotelowa","D:/ftp/dropbox/Italia","D:/ftp/dropbox/Izba","D:/ftp/dropbox/Kuznica","D:/ftp/dropbox/NewPort","D:/ftp/dropbox/Pino","D:/ftp/dropbox/Remo","D:/ftp/dropbox/River","D:/ftp/dropbox/Stek","D:/ftp/dropbox/Zapiecek"]
+    input_folders = []
+    archive_folders = []
     
     while True:
         for input_folder, archive_folder in zip(input_folders, archive_folders):
