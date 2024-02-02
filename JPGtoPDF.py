@@ -2,6 +2,7 @@ from PIL import Image
 import os
 import shutil
 import zipfile
+import time
 
 def resize_image(img, max_width, max_height):
     """
@@ -17,7 +18,7 @@ def resize_image(img, max_width, max_height):
     # Resize the image using the default resampling method
     return img.resize((new_width, new_height))
 
-def convert_images_to_individual_pdfs(input_folder, output_folder, archive_path):
+def convert_images_to_individual_pdfs(input_folder, output_folder, archive_folder):
     images = [file for file in os.listdir(input_folder) if file.lower().endswith('.jpg')]
 
     if not images:
@@ -26,7 +27,7 @@ def convert_images_to_individual_pdfs(input_folder, output_folder, archive_path)
 
     for image_name in images:
         image_path = os.path.join(input_folder, image_name)
-        pdf_path = os.path.join(output_folder, os.path.splitext(image_name)[0] + ".pdf")
+        pdf_path = os.path.join(archive_folder, os.path.splitext(image_name)[0] + ".pdf")
 
         try:
             img = Image.open(image_path)
@@ -43,29 +44,23 @@ def convert_images_to_individual_pdfs(input_folder, output_folder, archive_path)
 
             print(f"PDF created successfully: {pdf_path}")
 
-            # Calculate the relative path inside the zip archive
-            relative_path = os.path.join(os.path.basename(archive_path), os.path.basename(input_folder), image_name)
-            
-            # Add the processed JPG file to the zip archive with maximum compression
-            with zipfile.ZipFile(archive_path, 'a', compression=zipfile.ZIP_DEFLATED) as zipf:
-                zipf.write(image_path, arcname=relative_path)
-            
-            print(f"JPG file added to archive: {archive_path}/{os.path.basename(input_folder)}/{image_name}")
-            
-            # Remove the processed JPG file
-            os.remove(image_path)
-            print(f"JPG file removed: {image_path}")
+            # Optionally, you can remove the original JPG file if needed
+            # os.remove(image_path)
+            # print(f"JPG file removed: {image_path}")
+
         except Exception as e:
             print(f"Error processing {image_name}: {e}")
 
+def main_loop():
+    input_folders = ["C:/users/admin/Dropbox/Azja","C:/users/admin/Dropbox/Browar", "C:/users/admin/Dropbox/Cafe","C:/users/admin/Dropbox/CKF13","C:/users/admin/Dropbox/CookClub","C:/users/admin/Dropbox/Corner","C:/users/admin/Dropbox/Destilo","C:/users/admin/Dropbox/Europejska","C:/users/admin/Dropbox/Garden","C:/users/admin/Dropbox/GND","C:/users/admin/Dropbox/Hotelowa","C:/users/admin/Dropbox/Italia","C:/users/admin/Dropbox/Izba","C:/users/admin/Dropbox/Kuznica","C:/users/admin/Dropbox/NewPort","C:/users/admin/Dropbox/Pino","C:/users/admin/Dropbox/Remo","C:/users/admin/Dropbox/River","C:/users/admin/Dropbox/Stek","C:/users/admin/Dropbox/Zapiecek"]
+    archive_folders = ["D:/ftp/dropbox/Azja","D:/ftp/dropbox/Browar", "D:/ftp/dropbox/Cafe","D:/ftp/dropbox/CKF13","D:/ftp/dropbox/CookClub","D:/ftp/dropbox/Corner","D:/ftp/dropbox/Destilo","D:/ftp/dropbox/Europejska","D:/ftp/dropbox/Garden","D:/ftp/dropbox/GND","D:/ftp/dropbox/Hotelowa","D:/ftp/dropbox/Italia","D:/ftp/dropbox/Izba","D:/ftp/dropbox/Kuznica","D:/ftp/dropbox/NewPort","D:/ftp/dropbox/Pino","D:/ftp/dropbox/Remo","D:/ftp/dropbox/River","D:/ftp/dropbox/Stek","D:/ftp/dropbox/Zapiecek"]
+    
+    while True:
+        for input_folder, archive_folder in zip(input_folders, archive_folders):
+            convert_images_to_individual_pdfs(input_folder, input_folder, archive_folder)
+        
+        print("Waiting for one hour before the next iteration...")
+        time.sleep(1800)  # Delay for one hour (3600 seconds)
+
 if __name__ == "__main__":
-    
-############################################
-#       SET UP UR DATA HERE:               #
-############################################
-    input_folders = ["C:/data/companya", "C:/data/companyb", "C:/data/companyc"]
-    archive_path = "C:/data/arch.zip"
-    
-    for input_folder in input_folders:
-        output_folder = input_folder  # Save PDFs in the same folder as the input JPGs
-        convert_images_to_individual_pdfs(input_folder, output_folder, archive_path)
+    main_loop()
