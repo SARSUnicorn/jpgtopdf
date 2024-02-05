@@ -5,7 +5,7 @@ I made it for the use in WebCon APP - since app does not support jpg natively.
 ## Types of Files:
 
 * JPG to PDF - Standard Version
-it takes every jpg and makes pdf copy in selected new location
+it's the only one that does LOG.txg of its work
 
 * Del to PDF - Eco Version
 does exacly the same but instead of saving them it just deletes it
